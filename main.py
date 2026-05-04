@@ -64,7 +64,7 @@ def process_with_rag(table_html):
 
         Rules:
         1. Extract EVERY "Share Holding Percentage" row. There may be multiple rows (e.g., different dates). Extract ALL of them.
-        2. Convert dates to DDMMYYYY integer format. Example: "Jun 30, 2025" becomes 30062025, "Feb 28, 2026" becomes 28022026.
+        2. Convert dates to DDMMYYYY integer format. Example: "Jun 30, 2025" becomes 30062025, "Feb 28, 2026" becomes 28022026, "Mar 31, 2025" becomes 31032025.
         3. Use these exact keys: holding_date, sponsor_director, govt_share, institute_share, foreign_share, public_share, last_update.
         4. All numeric values must be floats (e.g., 0.00 not "0.00").
         5. holding_date must be an integer (e.g., 30062025 not "30062025").
