@@ -1,3 +1,4 @@
+import re
 import sys
 import pytz
 import urllib3
@@ -47,6 +48,7 @@ def process_with_rag(table_html):
         # 1. Setup Embeddings and Model
         embeddings = OllamaEmbeddings(model="mxbai-embed-large")
         llm = ChatOllama(model="llama3.2", temperature=0)
+        # llm = ChatOllama(model="deepseek-r1:latest", temperature=0)
 
         # 2. Store entire table as single document to preserve structure
         vectorstore = FAISS.from_texts([table_html], embedding=embeddings)
@@ -87,6 +89,10 @@ def process_with_rag(table_html):
         # 5. Invoke 
         response = chain.invoke({"context": context, "today": today})
         return response.content
+
+        # this response proccess for deepseek chat model
+        # cleaned = re.sub(r'<think>.*?</think>', '', response.content, flags=re.DOTALL).strip()
+        # return cleaned
     except Exception as e:
         return f"Error in RAG process: {e}"
 
